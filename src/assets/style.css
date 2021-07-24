@@ -1,0 +1,78 @@
+body {
+    background: url('https://cdn.wallpapersafari.com/53/25/TKf4hW.png') 0 0/cover no-repeat;
+}
+
+.wrapper {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.bg-transparent-white {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.bg-transparent-gray {
+    background-color: rgba(158, 156, 156, 0.5);
+}
+
+.text-light {
+    color: #e0dddd !important;
+}
+
+.header {
+    margin-left: 10%;
+}
+
+.main-block {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #EEEEEE;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, .25);
+    border-radius: 7px;
+    width: 100%;
+    min-height: 80vh;
+}
+
+.form {
+    padding: 57px 100px 64px 68px;
+    background: #FFFFFF;
+    border: 1px solid #EEEEEE;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, .25);
+    border-radius: 16px;
+    max-width: 770px;
+    width: 100%;
+}
+
+.button {
+    background: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    height: 48px;
+    line-height: 1;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.2s;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+    width: max-content;
+    max-width: 250px;
+}
+
+
+.button-blue {
+    background: #4A61DD;
+    color: #FFFFFF;
+    transition: background 0.2s;
+}
+
+@media (max-width: 930px) {
+    .header {
+        margin-left: 3%;
+    }
+}
+
+@media (max-width: 1340px) {
+    .wrapper {
+        width: 100%;
+    }
+}
