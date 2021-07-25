@@ -47,11 +47,6 @@ export default {
       loading: false
     }
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
-  },
   created() {
     this.loadListOrdersByWeek();
   },

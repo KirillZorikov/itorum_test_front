@@ -33,7 +33,7 @@ class OrderUserService {
             responseType: 'blob',
             headers: authHeader()
         };
-        return await axios.post(API_URL + `orders/export`, config);
+        return await axios.get(API_URL + `orders/export`, config);
     }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="btn add-button" data-bs-toggle="modal" data-bs-target="#modal">
+  <button type="button" class="btn add-button" data-bs-toggle="modal" data-bs-target="#modalAddOrder">
     <svg
         class="-ml-0.5 mr-2 h-6 w-6"
         xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@
   </button>
 
   <!-- Modal -->
-  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="modalAddOrder" tabindex="-1" aria-labelledby="exampleModalLabel"
        aria-hidden="true">
     <div class="modal-dialog">
       <form @submit.prevent="addOrder">
@@ -62,7 +62,10 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-            <button type="submit" class="btn btn-primary">Добавить</button>
+            <button type="submit" class="btn btn-primary">
+              <span v-show="loading" class="spinner-border spinner-border-sm me-1"></span>
+              <span>Добавить</span>
+            </button>
           </div>
         </div>
       </form>
@@ -152,7 +155,7 @@ export default {
       return valid
     },
     hideModal() {
-      const truck_modal = document.querySelector('#modal');
+      const truck_modal = document.querySelector('#modalAddOrder');
       const modal = Modal.getInstance(truck_modal);
       modal.hide();
     },

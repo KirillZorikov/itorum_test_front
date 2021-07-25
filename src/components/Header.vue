@@ -21,10 +21,7 @@
               </router-link>
             </li>
             <li class="nav-item li-nav p-2">
-              <router-link :to="{name: '404'}" class="nav-link text-dark"
-                           :class="{'active-link': currentRouteName === 'AddRecipe'}">
-                Экспорт заказов
-              </router-link>
+              <ExportOrders/>
             </li>
           </ul>
           <div class="dropdown me-3">
@@ -64,8 +61,10 @@
 </template>
 
 <script>
+import ExportOrders from "./ExportOrders";
 export default {
   name: "Nav",
+  components: {ExportOrders},
   computed: {
     currentUser() {
       return this.$store.state.auth.user;

@@ -3,7 +3,7 @@
     <div class="alert alert-danger d-flex align-items-center" style="width: fit-content;" role="alert">
           <span class="mt-1">
             <template v-for="type in Object.keys(message)" :key="type">
-              <span class="d-block" v-if="message[type]">{{ message[type].join() }}</span>
+              <span class="d-block" v-if="message[type]">{{ message[type].join('\n') }}</span>
             </template>
             <template v-if="!Object.keys(message).length">
               <span class="d-block">Введены невалидные данные.</span>
