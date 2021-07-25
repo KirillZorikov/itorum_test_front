@@ -3,7 +3,7 @@
     <div class="wrapper">
       <div class="d-flex justify-content-center align-items-center">
         <p class="mt-2 mb-2">© 2021 Copyright:
-          <a href="https://itorum.ru/" target="_blank" class="fw-bold fs-6 btn bg-transparent shadow-none">
+          <a href="https://itorum.ru/" target="_blank" class="fw-bold fs-6 btn bg-transparent shadow-none p-0 pb-sm-1">
             Itorum.ru
           </a>
         </p>

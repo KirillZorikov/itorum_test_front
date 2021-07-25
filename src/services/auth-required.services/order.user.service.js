@@ -17,6 +17,13 @@ class OrderUserService {
         return await axios.delete(API_URL + `orders/${id}`, {headers: authHeader()});
     }
 
+    async deleteListOrders(listOrders) {
+        return await axios.delete(API_URL + `orders/delete_list_orders`, {
+            headers: authHeader(),
+            data: {list_ids: listOrders}
+        });
+    }
+
     async addOrder(data) {
         return await axios.post(API_URL + `orders`, data, {headers: authHeader()});
     }

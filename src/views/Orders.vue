@@ -2,36 +2,37 @@
   <div class="wrapper ps-4 pe-4">
     <div class="d-flex justify-content-between mt-3">
       <h3 class="fw-bold">Список заказов:</h3>
-      <button type="button" class="btn add-button">
-        <svg
-            class="-ml-0.5 mr-2 h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            fill="#ffffff"
-        >
-          <path
-              d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-          ></path>
-        </svg>
-        Добавить
-      </button>
+      <div>
+        <DeleteOrder v-if="selectedOrders.length" :orders="selectedOrders" @deleted-orders="loadListOrders"/>
+        <AddOrder @added-order="loadListOrders"/>
+      </div>
     </div>
     <div class="main-block-wrapper">
       <div class="main-block mt-3 p-3 ps-5 pe-5">
         <div class="row order p-0 m-0 mt-3 pb-4">
-          <div class="col-2 fw-bold">ID</div>
+          <div class="col-1 fw-bold">ID</div>
           <div class="col-3 text-center fw-bold">Дата</div>
-          <div class="col-4 text-center fw-bold">Заказчик</div>
+          <div class="col-3 text-center fw-bold">Заказчик</div>
           <div class="col-3 text-end fw-bold">Сумма заказа</div>
+          <div class="col-2 text-center">
+            <button class="fw-bold btn shadow-none select-button p-0 ps-3 pe-3 d-inline"
+                    @click="selectDeselectAll">Выбрать
+            </button>
+          </div>
         </div>
         <template v-if="orders.length">
-          <div v-for="order in orders" :key="order" class="row order p-0 m-0 mt-3 pb-2">
-            <div class="col-2">{{ order.id }}</div>
+          <div v-for="order in orders" :key="order" class="row order p-0 m-0 pt-3 pb-2"
+               :class="{'selected-block': selectedOrders.includes(order.id)}">
+            <div class="col-1">{{ order.id }}</div>
             <div class="col-3 text-center">{{ order.created_at.split('T')[0] }}</div>
-            <div class="col-4 text-center">{{ order.customer }}</div>
+            <div class="col-3 text-center">{{ order.customer }}</div>
             <div class="col-3 text-end">{{ order.price }}</div>
+            <div class="col-2 text-center">
+              <i class="fs-6 me-1" @click="selectDeselectOrder(order.id)" :class="
+              {'text-danger fas fa-check-circle': selectedOrders.includes(order.id),
+              'far fa-circle': !selectedOrders.includes(order.id)}">
+              </i>
+            </div>
           </div>
         </template>
         <div v-else class="text-center pt-5">
@@ -49,14 +50,18 @@
 <script>
 import {OrderUserService} from "../services/auth-required.services";
 import Paginator from "../components/Paginator";
+import AddOrder from "../components/AddOrder";
+import DeleteOrder from "../components/DeleteOrder";
 
 export default {
   name: "Orders",
-  components: {Paginator},
+  title: "Все заказы",
+  components: {DeleteOrder, AddOrder, Paginator},
   data() {
     return {
       loading: false,
-      totalPages: ''
+      totalPages: '',
+      selectedOrders: []
     }
   },
   computed: {
@@ -96,6 +101,7 @@ export default {
       }
     },
     loadListOrders() {
+      this.selectedOrders = [];
       this.loading = true;
       OrderUserService.getListOrders(this.makeParams()).then(
           response => {
@@ -111,6 +117,22 @@ export default {
           }
       );
     },
+    selectDeselectOrder(id) {
+      if (this.selectedOrders.includes(id)) {
+        this.selectedOrders.splice(this.selectedOrders.indexOf(id), 1);
+      } else {
+        this.selectedOrders.push(id);
+      }
+    },
+    selectDeselectAll() {
+      if (this.selectedOrders.length) {
+        this.selectedOrders = [];
+      } else {
+        for (const index in this.orders) {
+          this.selectedOrders.push(this.orders[index].id);
+        }
+      }
+    }
   },
   watch: {
     pageStateOptions(value) {
