@@ -81,6 +81,38 @@ body {
     border-radius: 1.3rem !important;
 }
 
+.pagination {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 1.3rem;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 130%;
+}
+
+.pagination > li > button {
+    width: 55px;
+    height: 55px;
+    transition: none !important;
+}
+
+.pagination-active {
+    background-color: #b8bdbf !important;
+    color: white !important;
+    border-radius: 50% !important;
+}
+
+.pagination-hover:hover {
+    background-color: #ddd;
+    color: black;
+    border-radius: 50%;
+}
+
+
 @media (max-width: 930px) {
     .header {
         margin-left: 3%;

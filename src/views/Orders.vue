@@ -40,14 +40,19 @@
         </div>
       </div>
     </div>
+    <div v-if="orders.length" class="d-flex justify-content-center mt-3">
+      <Paginator :total="totalPages"/>
+    </div>
   </div>
 </template>
 
 <script>
 import {OrderUserService} from "../services/auth-required.services";
+import Paginator from "../components/Paginator";
 
 export default {
   name: "Orders",
+  components: {Paginator},
   data() {
     return {
       loading: false,
@@ -58,6 +63,16 @@ export default {
     currentUser() {
       return this.$store.state.auth.user;
     },
+    pageStateOptions() {
+      return {
+        page: this.page
+      };
+    },
+    queryParams() {
+      return {
+        page: this.$route.query.page
+      };
+    },
     page() {
       return this.$store.state.page;
     },
@@ -66,6 +81,7 @@ export default {
     },
   },
   created() {
+    this.initUrlParams(this.page);
     this.loadListOrders();
   },
   methods: {
@@ -73,6 +89,11 @@ export default {
       return {
         page: this.page
       };
+    },
+    initUrlParams(page) {
+      if (page && this.$route.query.page) {
+        this.$store.commit('changePage', parseInt(this.$route.query.page));
+      }
     },
     loadListOrders() {
       this.loading = true;
@@ -91,6 +112,29 @@ export default {
       );
     },
   },
+  watch: {
+    pageStateOptions(value) {
+      if (value.page === 1) {
+        this.$router.push(`${window.location.pathname}`);
+      } else {
+        this.$router.push(`${window.location.pathname}?page=${value.page}`);
+      }
+    },
+    page() {
+      this.loadListOrders()
+    },
+    $route() {
+      if (this.$route.name !== this.$options.name) {
+        this.$store.commit('changePage', 1);
+      }
+    },
+    queryParams(to) {
+      if (this.$route.name !== this.$options.name) {
+        return
+      }
+      this.$store.commit('changePage', to.page ? parseInt(to.page) : 1)
+    }
+  }
 }
 </script>
 
