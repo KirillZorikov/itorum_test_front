@@ -56,8 +56,7 @@ export default {
       this.loading = true;
       OrderService.getListOrdersByWeek(this.weekNumber).then(
           response => {
-            // this.ordersByWeek = response.data;
-            setTimeout(() => { this.ordersByWeek = response.data; this.loading = false; }, 300);
+            setTimeout(() => { this.ordersByWeek = response.data; this.loading = false; }, 200);
           },
           error => {
             this.loading = false;
