@@ -1,25 +1,16 @@
 # itorum_test_front
 
-Vue 3 фронтент для тествого задания компании Иторум.
+Vue 3 фронтенд для тествого задания компании Иторум.
 
-Сайт проекта: https://kz-projects.tk/itorum_test
+Сайт проекта: https://kz-projects.tk/itorum_test/
 
 Больше информации здесь: https://github.com/KirillZorikov/itorum_test_back
 
-## Project setup
-```
-npm install
-```
+### Для зпуска локально необходимо:
 
-### Compiles and hot-reloads for development
+- Скачать **dist-itorum_test** и **docker-compose.yml**
+- Перейти в директорию с загруженными файлами и выполнить:
 ```
-npm run serve
+docker-compose up
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Сайт будет доступен по адресу: http://127.0.0.1/itorum_test/
