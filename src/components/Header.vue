@@ -9,14 +9,14 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto my-2 my-lg-0">
             <li class="nav-item li-nav p-2">
-              <router-link :to="{name: '404'}" class="nav-link text-dark"
-                           :class="{'active-link': ['Home', 'Recipe', 'Author'].includes(currentRouteName)}">
+              <router-link :to="{name: 'Home'}" class="nav-link text-dark"
+                           :class="{'active-link': currentRouteName === 'Home'}">
                 Заказы за неделю
               </router-link>
             </li>
             <li class="nav-item li-nav p-2">
-              <router-link :to="{name: '404'}" class="nav-link text-dark"
-                           :class="{'active-link': currentRouteName === 'Follow'}">
+              <router-link :to="{name: 'Orders'}" class="nav-link text-dark"
+                           :class="{'active-link': currentRouteName === 'Orders'}">
                 Все заказы
               </router-link>
             </li>
@@ -56,16 +56,6 @@
               </template>
             </ul>
           </div>
-          <!--          <template v-if="!currentUser">-->
-          <!--            <router-link :to="{name: '404'}" class="nav-link text-dark">Войти</router-link>-->
-          <!--            <router-link :to="{name: '404'}">-->
-          <!--              <button class="button button-blue" href="#" tabindex="-1" aria-disabled="true">Создать аккаунт</button>-->
-          <!--            </router-link>-->
-          <!--          </template>-->
-          <!--          <template v-else>-->
-          <!--            <router-link :to="{name: '404'}" class="nav-link text-dark">Изменить пароль</router-link>-->
-          <!--            <router-link :to="{name: '404'}" class="nav-link text-dark">Выход</router-link>-->
-          <!--          </template>-->
         </div>
       </div>
     </div>
@@ -88,7 +78,8 @@ export default {
     handleLogout() {
       this.$store.dispatch('auth/logout').then(
           () => {
-            this.$router.push({name: '404'});
+            console.log(this.$route.name)
+            this.$router.push({name: 'Home'});
           }
       )
     }

@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper mb-5">
-    <h1 class="fw-bold mt-5 mb-5 header">Вход</h1>
+    <h1 class="fw-bold mt-5 mb-5 header">Регистрация</h1>
+
     <div v-if="showMessage" class="row mt-1 mb-1 d-flex justify-content-center w-100">
       <div class="alert alert-danger d-flex align-items-center" style="width: fit-content;" role="alert">
           <span class="mt-1">
@@ -20,7 +21,7 @@
     </div>
 
     <div class="d-flex justify-content-center align-items-center form-wrapper">
-      <form class="form needs-validation" @submit.prevent="handleLogin">
+      <form class="form needs-validation" @submit.prevent="handleRegister">
 
         <div class="mb-3 row">
           <label for="inputUsername" class="col-5 col-form-label p-0 fs-5">Имя пользователя</label>
@@ -82,7 +83,7 @@
         <div class="d-flex justify-content-center mt-4 align-items-end">
           <button type="submit" class="button button-blue" :disabled="loading">
             <span v-show="loading" class="spinner-border spinner-border-sm me-1"></span>
-            <span>Войти</span>
+            <span>Регистрация</span>
           </button>
         </div>
 
@@ -95,8 +96,8 @@
 import User from '../../models/user';
 
 export default {
-  name: "Login",
-  title: 'Вход',
+  name: "Register",
+  title: 'Регистрация',
   data() {
     return {
       user: new User(),
@@ -112,7 +113,7 @@ export default {
     }
   },
   methods: {
-    handleLogin() {
+    handleRegister() {
       if (this.user.username && this.user.password) {
         if (this.user.password.length < 5) {
           this.message = {'password': ['Минимальная длина пароля - 5 символов!']}
@@ -126,8 +127,7 @@ export default {
             () => {
               this.$store.dispatch('auth/login', this.user).then(
                   () => {
-                    // this.$router.push({name: 'Home', params: {message: 'Вы успешно зарегистрировались!'}});
-                    this.$router.push({name: '404'});
+                    this.$router.push({name: 'Home', params: {message: 'Вы успешно зарегистрировались!'}});
                   },
                   () => {
                     this.$router.push({name: 'Login'});

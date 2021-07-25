@@ -93,7 +93,7 @@ export default {
         this.loading = true;
         this.$store.dispatch('auth/login', this.user).then(
             () => {
-              this.$router.push({name: '404'});
+              this.$router.push({name: 'Home'});
             },
             error => {
               this.loading = false;
